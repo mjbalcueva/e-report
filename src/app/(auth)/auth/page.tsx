@@ -8,7 +8,9 @@ import { RegisterForm } from '@/client/components/auth/register-form'
 import styles from '@/client/styles/auth.module.css'
 
 export default function AuthPage() {
-	const [action] = useState('')
+	const [isLogin, setIsLogin] = useState(true)
+
+	const toggleForm = () => setIsLogin(!isLogin)
 
 	return (
 		<div className="relative flex min-h-screen items-center justify-center">
@@ -20,9 +22,8 @@ export default function AuthPage() {
 				quality={100}
 				className="absolute inset-0 object-cover"
 			/>
-			<div className={`${styles.wrapper} ${action}`}>
-				<LoginForm />
-				<RegisterForm />
+			<div className={`${styles.wrapper} ${isLogin && 'active'}`}>
+				{isLogin ? <LoginForm onToggle={toggleForm} /> : <RegisterForm onToggle={toggleForm} />}
 			</div>
 		</div>
 	)
