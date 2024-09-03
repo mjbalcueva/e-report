@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 import { api, HydrateClient } from '@/shared/trpc/server'
 
-import { getServerAuthSession } from '@/server/auth'
+import { auth } from '@/server/lib/auth'
 
 import { LatestPost } from '@/app/old/_components/post'
 
 export default async function Home() {
 	const hello = await api.post.hello({ text: 'from tRPC' })
-	const session = await getServerAuthSession()
+	const session = await auth()
 
 	void api.post.getLatest.prefetch()
 
@@ -46,7 +46,7 @@ export default async function Home() {
 
 						<div className="flex flex-col items-center justify-center gap-4">
 							<p className="text-center text-2xl text-white">
-								{session && <span>Logged in as {session.user?.name}</span>}
+								{session && <span>Logged in as {session.user?.firstname}</span>}
 							</p>
 							<Link
 								href={session ? '/api/auth/signout' : '/api/auth/signin'}
