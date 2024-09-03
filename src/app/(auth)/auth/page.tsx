@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import { LoginForm } from '@/client/components/auth/login-form'
 import { RegisterForm } from '@/client/components/auth/register-form'
+import { cn } from '@/client/lib/utils'
 import styles from '@/client/styles/auth.module.css'
 
 export default function AuthPage() {
@@ -22,7 +23,7 @@ export default function AuthPage() {
 				quality={100}
 				className="absolute inset-0 object-cover"
 			/>
-			<div className={`${styles.wrapper} ${isLogin && 'active'}`}>
+			<div className={cn(styles.wrapper, !isLogin && styles.active)}>
 				{isLogin ? <LoginForm onToggle={toggleForm} /> : <RegisterForm onToggle={toggleForm} />}
 			</div>
 		</div>

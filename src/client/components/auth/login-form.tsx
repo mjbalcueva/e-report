@@ -2,6 +2,9 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { TbLockFilled, TbMailFilled } from 'react-icons/tb'
+
+import '@/client/styles/auth.module.css'
 
 interface LoginFormProps {
 	onToggle: () => void
@@ -34,10 +37,10 @@ export const LoginForm = ({ onToggle }: LoginFormProps) => {
 	}
 
 	return (
-		<div className="form-box login">
-			<form onSubmit={handleSubmit}>
+		<div className="formBox login">
+			<form onSubmit={handleSubmit} className="form">
 				<h1>Login</h1>
-				<div className="inputbox">
+				<div className="inputBox">
 					<input
 						type="text"
 						placeholder="Username"
@@ -45,8 +48,9 @@ export const LoginForm = ({ onToggle }: LoginFormProps) => {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
+					<TbMailFilled />
 				</div>
-				<div className="inputbox">
+				<div className="inputBox">
 					<input
 						type="password"
 						placeholder="Password"
@@ -54,15 +58,16 @@ export const LoginForm = ({ onToggle }: LoginFormProps) => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
+					<TbLockFilled />
 				</div>
-				<div className="remember-forgot">
+				<div className="rememberForgot">
 					<label>
 						<input type="checkbox" /> Remember me
 					</label>
 					<a href="#">Forgot password?</a>
 				</div>
 				<button type="submit">Login</button>
-				<div className="register-link">
+				<div className="registerLink">
 					<p>
 						Don&apos;t have an account?{' '}
 						<a href="#" onClick={onToggle}>
